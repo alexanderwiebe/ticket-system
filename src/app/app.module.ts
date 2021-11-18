@@ -8,6 +8,7 @@ import { AppComponent } from "./app.component";
 import { AppEffects } from "./app.effects";
 import { BackendService } from "./backend.service";
 import { metaReducers, reducers } from "./reducers";
+import { TicketModule } from "./ticket/ticket.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { metaReducers, reducers } from "./reducers";
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
+    TicketModule,
   ],
   providers: [BackendService],
   bootstrap: [AppComponent],
