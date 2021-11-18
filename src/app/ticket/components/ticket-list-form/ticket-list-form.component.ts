@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from "@angular/core";
 import { Ticket } from "src/app/backend.service";
 
@@ -14,8 +16,13 @@ import { Ticket } from "src/app/backend.service";
 })
 export class TicketListFormComponent implements OnInit {
   @Input() tickets: Ticket[];
+  @Output() openTicket = new EventEmitter<Ticket>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  ticketClick(ticket: Ticket) {
+    this.openTicket.emit(ticket);
+  }
 }

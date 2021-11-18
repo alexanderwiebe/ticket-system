@@ -2,6 +2,6 @@
 
 <ul>
     <li *ngFor="let t of tickets">
-        Ticket: {{t.id}}, {{t.description}}
+        <span (click)="ticketClick(t)">Ticket: {{t.id}}, {{t.description}}</span>
     </li>
 </ul>
