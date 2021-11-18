@@ -9,6 +9,7 @@ import { AppEffects } from "./app.effects";
 import { BackendService } from "./backend.service";
 import { metaReducers, reducers } from "./reducers";
 import { TicketModule } from "./ticket/ticket.module";
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { TicketModule } from "./ticket/ticket.module";
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
     TicketModule,
+    AppRoutingModule,
   ],
   providers: [BackendService],
   bootstrap: [AppComponent],
