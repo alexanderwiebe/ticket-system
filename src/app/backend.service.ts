@@ -70,12 +70,16 @@ export class BackendService {
     return of(this.findUserById(id)).pipe(delay(randomDelay()));
   }
 
-  newTicket(payload: { description: string }) {
+  newTicket(payload: {
+    description: string;
+    assigneeId: number;
+    completed: boolean;
+  }) {
     const newTicket: Ticket = {
       id: ++this.lastId,
       description: payload.description,
-      assigneeId: null,
-      completed: false,
+      assigneeId: payload.assigneeId,
+      completed: payload.completed,
     };
 
     this.storedTickets = this.storedTickets.concat(newTicket);
