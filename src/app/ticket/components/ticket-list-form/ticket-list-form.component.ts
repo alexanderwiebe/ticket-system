@@ -6,7 +6,6 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import { FormBuilder } from "@angular/forms";
 import { Dictionary } from "@ngrx/entity";
 import { Ticket, User } from "src/app/backend.service";
 
@@ -21,9 +20,7 @@ export class TicketListFormComponent implements OnInit {
   @Input() usersById: Dictionary<User>;
   @Output() openTicket = new EventEmitter<Ticket>();
 
-  form = this.fb.group({});
-
-  constructor(private fb: FormBuilder) {}
+  constructor() {}
 
   ngOnInit(): void {}
 

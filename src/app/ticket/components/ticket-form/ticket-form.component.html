@@ -1,2 +1,21 @@
-<p>ticket-form works!</p>
-<pre> {{ ticket | json }}</pre>
+<h2 *ngIf="ticket else newTicket">Edit ticket</h2>
+<ng-template #newTicket>
+  <h2>Add ticket</h2>
+</ng-template>
+
+<div [formGroup]="form">
+    <div class="form-group">
+        <label>description: </label>
+        <input type="text" class="form-control"  formControlName="description">
+    </div>
+    <div class="form-group">
+        <label>assignee: </label>
+        <input type="text" class="form-control" formControlName="assigneeId">
+    </div>
+    <div class="form-group">
+        <label>status: </label>
+        <input type="text" class="form-control" formControlName="completed">
+    </div>
+</div>
+<button (click)="save()" [disabled]="!form.valid">Save</button>
+<button (click)="cancel()">Cancel</button>

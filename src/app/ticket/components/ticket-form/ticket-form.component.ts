@@ -4,6 +4,7 @@ import {
   Input,
   OnInit,
 } from "@angular/core";
+import { FormBuilder, Validators } from "@angular/forms";
 import { Ticket } from "src/app/backend.service";
 
 @Component({
@@ -15,7 +16,21 @@ import { Ticket } from "src/app/backend.service";
 export class TicketFormComponent implements OnInit {
   @Input() ticket: Ticket;
 
-  constructor() {}
+  form = this.fb.group({
+    description: ["", Validators.required],
+    assigneeId: [],
+    completed: [false],
+  });
 
-  ngOnInit(): void {}
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit(): void {
+    if (this.ticket) {
+      this.form.patchValue(this.ticket);
+    }
+  }
+
+  save() {}
+
+  cancel() {}
 }
