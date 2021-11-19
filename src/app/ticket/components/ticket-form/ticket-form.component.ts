@@ -31,7 +31,7 @@ export class TicketFormComponent implements OnInit {
   });
 
   formError = false;
-  selectedUserId = null;
+  selectedUserId: number = null;
 
   constructor(private fb: FormBuilder) {}
 

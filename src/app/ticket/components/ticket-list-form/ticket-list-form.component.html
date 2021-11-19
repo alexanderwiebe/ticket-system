@@ -1,8 +1,31 @@
 <mat-card>
-    <mat-card-title>Tickets list</mat-card-title>
-    <ul>
-        <li *ngFor="let t of tickets">
-            <span (click)="ticketClick(t)">Ticket: {{t.id}}, {{t.description}}</span>
-        </li>
-    </ul>
+  <mat-card-title>Tickets list</mat-card-title>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let ticket"> {{ticket.id}} </td>
+    </ng-container>
+  
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let ticket"> {{ticket.description}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="completed">
+        <th mat-header-cell *matHeaderCellDef> Completed </th>
+        <td mat-cell *matCellDef="let ticket">
+            <ng-container *ngIf="ticket.completed">✔</ng-container>
+            <ng-container *ngIf="!ticket.completed">❌</ng-container>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="user">
+        <th mat-header-cell *matHeaderCellDef> Assigned To </th>
+        <td mat-cell *matCellDef="let ticket"> {{usersById[ticket.assigneeId]?.name}} </td>
+    </ng-container>
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr style="cursor: pointer;" mat-row (click)="ticketClick(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
 </mat-card>

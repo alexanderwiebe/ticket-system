@@ -23,6 +23,7 @@ describe("TicketListComponent", () => {
         MatTableModule,
         ReactiveFormsModule,
         FormsModule,
+        MatTableModule,
       ],
       declarations: [TicketListComponent, TicketListFormComponent],
       providers: [

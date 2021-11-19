@@ -9,6 +9,7 @@ import { MatInputModule } from "@angular/material/input";
 import { MatSelectModule } from "@angular/material/select";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { MatTableModule } from "@angular/material/table";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { TicketFormComponent } from "./components/ticket-form/ticket-form.component";
@@ -48,6 +49,7 @@ import {
     MatSlideToggleModule,
     MatSelectModule,
     MatOptionModule,
+    MatTableModule,
   ],
 })
 export class TicketModule {}
