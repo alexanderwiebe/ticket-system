@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
 import { TicketFormComponent } from "./components/ticket-form/ticket-form.component";
@@ -32,6 +33,7 @@ import {
     StoreModule.forFeature(ticketFeatureKey, ticketReducer),
     StoreModule.forFeature(userFeatureKey, userReducer),
     EffectsModule.forFeature([TicketEffects, UserEffects]),
+    MatSnackBarModule,
   ],
 })
 export class TicketModule {}

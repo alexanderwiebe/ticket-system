@@ -32,5 +32,16 @@ export const reducer = createReducer(
     ...state,
     loading: false,
     loaded: false,
-  }))
+  })),
+  on(TicketActions.createTicket, TicketActions.updateTicket, (state) => ({
+    ...state,
+    loading: true,
+    loaded: false,
+  })),
+  on(
+    TicketActions.createTicketSuccess,
+    TicketActions.updateTicketSuccess,
+    (state, { ticket }) =>
+      adapter.upsertOne(ticket, { ...state, loading: false, loaded: true })
+  )
 );

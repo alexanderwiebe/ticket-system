@@ -4,6 +4,7 @@ import { select, Store } from "@ngrx/store";
 import { combineLatest, Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Ticket } from "src/app/backend.service";
+import { createTicket, updateTicket } from "../../store/actions/ticket.actions";
 import { selectTicketEntities } from "../../store/selectors/ticket.selectors";
 
 @Component({
@@ -23,4 +24,12 @@ export class TicketComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  onSave(ticket: Ticket) {
+    this.store.dispatch(createTicket({ ticket }));
+  }
+
+  onUpdate(ticket: Ticket) {
+    this.store.dispatch(updateTicket({ ticket }));
+  }
 }

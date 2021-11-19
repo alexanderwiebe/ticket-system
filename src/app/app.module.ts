@@ -10,6 +10,7 @@ import { BackendService } from "./backend.service";
 import { metaReducers, reducers } from "./reducers";
 import { TicketModule } from "./ticket/ticket.module";
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
     EffectsModule.forRoot([AppEffects]),
     TicketModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
   ],
   providers: [BackendService],
   bootstrap: [AppComponent],

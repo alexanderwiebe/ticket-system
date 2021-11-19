@@ -13,9 +13,16 @@
         <input type="text" class="form-control" formControlName="assigneeId">
     </div>
     <div class="form-group">
-        <label>status: </label>
+        <label>complete: </label>
         <input type="text" class="form-control" formControlName="completed">
     </div>
 </div>
-<button (click)="save()" [disabled]="!form.valid">Save</button>
+<div *ngIf="formError">
+    <span>Please correct form before trying to complete / save</span>
+</div>
 <button (click)="cancel()">Cancel</button>
+<button (click)="complete()">Complete</button>
+<button *ngIf="!ticket else update" (click)="save()" [disabled]="!form.valid">Save</button>
+<ng-template #update>
+    <button (click)="update()" [disabled]="!form.valid">Update</button>
+</ng-template>

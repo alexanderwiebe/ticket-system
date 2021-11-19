@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { catchError, concatMap, map } from "rxjs/operators";
@@ -19,5 +20,51 @@ export class TicketEffects {
     );
   });
 
-  constructor(private actions$: Actions, private service: BackendService) {}
+  createTickets$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TicketActions.createTicket),
+      concatMap(({ ticket }) =>
+        this.service.newTicket(ticket).pipe(
+          map((ticket) => {
+            this.snackBar.open("Ticket created", "", {
+              horizontalPosition: "center",
+              verticalPosition: "top",
+              duration: 2000,
+            });
+            return TicketActions.createTicketSuccess({ ticket });
+          }),
+          catchError((error) =>
+            of(TicketActions.createTicketFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  updateTickets$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TicketActions.updateTicket),
+      concatMap(({ ticket }) =>
+        this.service.update(ticket.id, ticket).pipe(
+          map((ticket) => {
+            this.snackBar.open("Ticket updated", "", {
+              horizontalPosition: "center",
+              verticalPosition: "top",
+              duration: 2000,
+            });
+            return TicketActions.updateTicketSuccess({ ticket });
+          }),
+          catchError((error) =>
+            of(TicketActions.updateTicketFailure({ error }))
+          )
+        )
+      )
+    );
+  });
+
+  constructor(
+    private actions$: Actions,
+    private service: BackendService,
+    private snackBar: MatSnackBar
+  ) {}
 }

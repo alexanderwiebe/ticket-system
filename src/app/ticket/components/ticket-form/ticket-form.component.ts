@@ -18,12 +18,15 @@ import { Ticket } from "src/app/backend.service";
 export class TicketFormComponent implements OnInit {
   @Input() ticket: Ticket;
   @Output() saveTicket = new EventEmitter<Ticket>();
+  @Output() updateTicket = new EventEmitter<Ticket>();
 
   form = this.fb.group({
     description: ["", Validators.required],
     assigneeId: [],
     completed: [false],
   });
+
+  formError = false;
 
   constructor(private fb: FormBuilder) {}
 
@@ -33,9 +36,28 @@ export class TicketFormComponent implements OnInit {
     }
   }
 
-  save() {
+  save(): void {
     if (this.form.valid) {
       this.saveTicket.emit(this.form.value);
+      this.formError = false;
+    } else {
+      this.formError = true;
+    }
+  }
+
+  update(): void {
+    if (this.form.valid) {
+      this.updateTicket.emit(this.form.value);
+      this.formError = false;
+    } else {
+      this.formError = true;
+    }
+  }
+
+  complete(): void {
+    if (this.form.valid) {
+      this.form.get("completed").setValue(true);
+      this.updateTicket.emit(this.form.value);
     }
   }
 

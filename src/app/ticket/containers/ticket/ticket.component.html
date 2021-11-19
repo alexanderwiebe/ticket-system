@@ -1,2 +1,5 @@
 <p>ticket works!</p>
-<app-ticket-form [ticket]="ticket$ | async"></app-ticket-form>
+<app-ticket-form
+    [ticket]="ticket$ | async"
+    (saveTicket)="onSave($event)"
+    (updateTicket)="onUpdate($event)"></app-ticket-form>
