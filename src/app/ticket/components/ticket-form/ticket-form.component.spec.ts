@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { TicketFormComponent } from "./ticket-form.component";
 
 describe("TicketFormComponent", () => {
@@ -7,6 +8,7 @@ describe("TicketFormComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FormsModule, ReactiveFormsModule],
       declarations: [TicketFormComponent],
     }).compileComponents();
   });
