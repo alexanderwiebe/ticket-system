@@ -7,7 +7,8 @@ import {
   Output,
 } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { Ticket } from "src/app/backend.service";
+import { Dictionary } from "@ngrx/entity";
+import { Ticket, User } from "src/app/backend.service";
 
 @Component({
   selector: "app-ticket-form",
@@ -17,6 +18,8 @@ import { Ticket } from "src/app/backend.service";
 })
 export class TicketFormComponent implements OnInit {
   @Input() ticket: Ticket;
+  @Input() users: User[];
+  @Input() usersById: Dictionary<User>;
   @Output() saveTicket = new EventEmitter<Ticket>();
   @Output() updateTicket = new EventEmitter<Ticket>();
 
@@ -28,12 +31,14 @@ export class TicketFormComponent implements OnInit {
   });
 
   formError = false;
+  selectedUserId = null;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     if (this.ticket) {
       this.form.patchValue(this.ticket);
+      this.selectedUserId = this.ticket.assigneeId;
     }
   }
 
@@ -62,5 +67,11 @@ export class TicketFormComponent implements OnInit {
     }
   }
 
-  cancel() {}
+  userSelected({ value }) {
+    this.form.get("assigneeId").setValue(value);
+  }
+
+  cancel() {
+    console.log("works");
+  }
 }

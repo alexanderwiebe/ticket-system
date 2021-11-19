@@ -3,7 +3,7 @@ import { CanActivate } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { Observable, of } from "rxjs";
 import { catchError, first, switchMap, tap } from "rxjs/operators";
-import { loadTickets } from "../ticket/store/actions/ticket.actions";
+import { loadUsers } from "../ticket/store/actions/user.actions";
 import { selectUsersLoaded } from "../ticket/store/selectors/user.selectors";
 
 @Injectable({
@@ -23,7 +23,7 @@ export class UserGuard implements CanActivate {
     return this.store.select(selectUsersLoaded).pipe(
       tap((loaded: boolean) => {
         if (!loaded) {
-          this.store.dispatch(loadTickets());
+          this.store.dispatch(loadUsers());
         }
       }),
       first()

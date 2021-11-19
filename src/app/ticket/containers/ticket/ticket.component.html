@@ -1,4 +1,6 @@
 <app-ticket-form
     [ticket]="ticket$ | async"
+    [users]="users$ | async"
+    [usersById]="userEntities$ | async"
     (saveTicket)="onSave($event)"
     (updateTicket)="onUpdate($event)"></app-ticket-form>

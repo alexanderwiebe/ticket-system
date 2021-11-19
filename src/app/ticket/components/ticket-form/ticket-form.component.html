@@ -17,7 +17,12 @@
         <div>
             <mat-form-field class="form-group">
                 <mat-label>assignee: </mat-label>
-                <input matInput type="text" class="form-control" formControlName="assigneeId">
+                <mat-select [(value)]="selectedUserId" (selectionChange)="userSelected($event)">
+                    <mat-option value>-- select assignee --</mat-option>
+                    <mat-option *ngFor="let user of users" [value]="user?.id">
+                      {{user?.name}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
         </div>
         <div>
@@ -28,9 +33,7 @@
         <span>Please correct form before trying to complete / save</span>
     </div>
     <button mat-flat-button (click)="cancel()">Cancel</button>
-    <button mat-flat-button *ngIf="ticket?.id" color="accent" (click)="complete()">Complete</button>
-    <button mat-flat-button *ngIf="!ticket else update" color="primary" (click)="save()" [disabled]="!form.valid">Save</button>
-    <ng-template #update>
-        <button mat-flat-button color="primary" (click)="update()" [disabled]="!form.valid">Update</button>
-    </ng-template>
+    <button mat-flat-button color="accent" *ngIf="ticket?.id" (click)="complete()">Complete</button>
+    <button mat-flat-button color="primary" *ngIf="!ticket" (click)="save()">Save</button>
+    <button mat-flat-button color="primary" *ngIf="ticket" (click)="update()">Update</button>
 </mat-card>
