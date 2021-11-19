@@ -1,16 +1,17 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { MatCardModule } from "@angular/material/card";
+import { MatTableModule } from "@angular/material/table";
+import { TicketListFormComponent } from "./ticket-list-form.component";
 
-import { TicketListFormComponent } from './ticket-list-form.component';
-
-describe('TicketListFormComponent', () => {
+describe("TicketListFormComponent", () => {
   let component: TicketListFormComponent;
   let fixture: ComponentFixture<TicketListFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TicketListFormComponent ]
-    })
-    .compileComponents();
+      imports: [MatCardModule, MatTableModule],
+      declarations: [TicketListFormComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +20,7 @@ describe('TicketListFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

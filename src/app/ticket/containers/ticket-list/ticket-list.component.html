@@ -1,3 +1,10 @@
+<div [formGroup]="form">
+    <mat-form-field class="form-group">
+        <mat-label>Search</mat-label>
+        <input matInput type="text" class="form-control" formControlName="search">
+    </mat-form-field>
+</div>
+
 <app-ticket-list-form 
     [tickets]="tickets$ | async"
     [usersById]="userEntities$ | async"

@@ -1,7 +1,8 @@
-<p>ticket-list-form works!</p>
-
-<ul>
-    <li *ngFor="let t of tickets">
-        <span (click)="ticketClick(t)">Ticket: {{t.id}}, {{t.description}}</span>
-    </li>
-</ul>
+<mat-card>
+    <mat-card-title>Tickets list</mat-card-title>
+    <ul>
+        <li *ngFor="let t of tickets">
+            <span (click)="ticketClick(t)">Ticket: {{t.id}}, {{t.description}}</span>
+        </li>
+    </ul>
+</mat-card>

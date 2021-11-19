@@ -1,6 +1,10 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatButtonModule } from "@angular/material/button";
+import { MatCardModule } from "@angular/material/card";
+import { MatInputModule } from "@angular/material/input";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import { EffectsModule } from "@ngrx/effects";
 import { StoreModule } from "@ngrx/store";
@@ -34,6 +38,10 @@ import {
     StoreModule.forFeature(userFeatureKey, userReducer),
     EffectsModule.forFeature([TicketEffects, UserEffects]),
     MatSnackBarModule,
+    MatInputModule,
+    MatCardModule,
+    MatButtonModule,
+    MatSlideToggleModule,
   ],
 })
 export class TicketModule {}

@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { of } from "rxjs";
 import { catchError, concatMap, map } from "rxjs/operators";
@@ -31,6 +32,7 @@ export class TicketEffects {
               verticalPosition: "top",
               duration: 2000,
             });
+            this.router.navigate(["../"]);
             return TicketActions.createTicketSuccess({ ticket });
           }),
           catchError((error) =>
@@ -52,6 +54,7 @@ export class TicketEffects {
               verticalPosition: "top",
               duration: 2000,
             });
+            this.router.navigate(["../"]);
             return TicketActions.updateTicketSuccess({ ticket });
           }),
           catchError((error) =>
@@ -65,6 +68,7 @@ export class TicketEffects {
   constructor(
     private actions$: Actions,
     private service: BackendService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 }

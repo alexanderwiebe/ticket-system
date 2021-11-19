@@ -1,5 +1,6 @@
 import { TestBed } from "@angular/core/testing";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { RouterTestingModule } from "@angular/router/testing";
 import { provideMockActions } from "@ngrx/effects/testing";
 import { Observable } from "rxjs";
 import { BackendService } from "src/app/backend.service";
@@ -11,7 +12,7 @@ describe("TicketEffects", () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [MatSnackBarModule],
+      imports: [MatSnackBarModule, RouterTestingModule],
       providers: [
         TicketEffects,
         provideMockActions(() => actions$),

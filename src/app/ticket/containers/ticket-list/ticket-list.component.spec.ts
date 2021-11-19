@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { MatCardModule } from "@angular/material/card";
+import { MatTableModule } from "@angular/material/table";
 import { Router } from "@angular/router";
 import { RouterTestingModule } from "@angular/router/testing";
 import { provideMockStore } from "@ngrx/store/testing";
@@ -14,7 +17,13 @@ describe("TicketListComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [
+        RouterTestingModule,
+        MatCardModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        FormsModule,
+      ],
       declarations: [TicketListComponent, TicketListFormComponent],
       providers: [
         provideMockStore({

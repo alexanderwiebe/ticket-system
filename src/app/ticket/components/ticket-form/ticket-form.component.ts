@@ -21,6 +21,7 @@ export class TicketFormComponent implements OnInit {
   @Output() updateTicket = new EventEmitter<Ticket>();
 
   form = this.fb.group({
+    id: [],
     description: ["", Validators.required],
     assigneeId: [],
     completed: [false],
