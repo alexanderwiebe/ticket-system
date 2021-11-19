@@ -1,1 +1,4 @@
-<app-ticket-list-form [tickets]="tickets$ | async" (openTicket)="navToTicket($event)"></app-ticket-list-form>
+<app-ticket-list-form 
+    [tickets]="tickets$ | async"
+    [usersById]="userEntities$ | async"
+    (openTicket)="navToTicket($event)"></app-ticket-list-form>
