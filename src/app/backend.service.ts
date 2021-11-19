@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Observable, of, throwError } from "rxjs";
-import { delay, tap } from "rxjs/operators";
+import { delay } from "rxjs/operators";
 
 /**
  * This service acts as a mock backend.
@@ -31,27 +31,28 @@ export class BackendService {
       id: 0,
       description: "Install a monitor arm",
       assigneeId: 111,
-      completed: false
+      completed: false,
     },
     {
       id: 1,
       description: "Move the desk to the new location",
       assigneeId: 111,
-      completed: false
-    }
+      completed: false,
+    },
   ];
 
   storedUsers: User[] = [
     { id: 111, name: "Victor" },
-    { id: 222, name: "Jack" }
+    { id: 222, name: "Jack" },
   ];
 
   lastId = 1;
 
-  private findTicketById = id =>
-    this.storedTickets.find(ticket => ticket.id === +id);
+  private findTicketById = (id) =>
+    this.storedTickets.find((ticket) => ticket.id === +id);
 
-  private findUserById = id => this.storedUsers.find(user => user.id === +id);
+  private findUserById = (id) =>
+    this.storedUsers.find((user) => user.id === +id);
 
   tickets() {
     return of(this.storedTickets).pipe(delay(randomDelay()));
@@ -74,7 +75,7 @@ export class BackendService {
       id: ++this.lastId,
       description: payload.description,
       assigneeId: null,
-      completed: false
+      completed: false,
     };
 
     this.storedTickets = this.storedTickets.concat(newTicket);
@@ -99,7 +100,7 @@ export class BackendService {
 
     const updatedTicket = { ...foundTicket, ...updates };
 
-    this.storedTickets = this.storedTickets.map(t =>
+    this.storedTickets = this.storedTickets.map((t) =>
       t.id === ticketId ? updatedTicket : t
     );
 
