@@ -1,16 +1,14 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { TicketFormComponent } from "./ticket-form.component";
 
-import { TicketFormComponent } from './ticket-form.component';
-
-describe('TicketFormComponent', () => {
+describe("TicketFormComponent", () => {
   let component: TicketFormComponent;
   let fixture: ComponentFixture<TicketFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TicketFormComponent ]
-    })
-    .compileComponents();
+      declarations: [TicketFormComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +17,13 @@ describe('TicketFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
+  });
+
+  it("should not save if invalid", () => {
+    let spy = spyOn(component.saveTicket, "emit").and.returnValue(true);
+    component.save();
+    expect(spy).not.toHaveBeenCalled();
   });
 });

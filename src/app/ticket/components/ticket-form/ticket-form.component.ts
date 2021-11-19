@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
 } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Ticket } from "src/app/backend.service";
@@ -15,6 +17,7 @@ import { Ticket } from "src/app/backend.service";
 })
 export class TicketFormComponent implements OnInit {
   @Input() ticket: Ticket;
+  @Output() saveTicket = new EventEmitter<Ticket>();
 
   form = this.fb.group({
     description: ["", Validators.required],
@@ -30,7 +33,11 @@ export class TicketFormComponent implements OnInit {
     }
   }
 
-  save() {}
+  save() {
+    if (this.form.valid) {
+      this.saveTicket.emit(this.form.value);
+    }
+  }
 
   cancel() {}
 }
