@@ -6,7 +6,10 @@ import { select, Store } from "@ngrx/store";
 import { combineLatest, Observable } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Ticket, User } from "src/app/backend.service";
-import { selectAllTickets } from "../../store/selectors/ticket.selectors";
+import {
+  selectAllTickets,
+  selectTicketByType,
+} from "../../store/selectors/ticket.selectors";
 import { selectUserEntities } from "../../store/selectors/user.selectors";
 
 @Component({
@@ -28,6 +31,10 @@ export class TicketListComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder
   ) {
+    this.store.pipe(select(selectTicketByType)).subscribe((data) => {
+      console.log(data);
+    });
+
     this.userEntities$ = this.store.pipe(select(selectUserEntities));
     this.tickets$ = combineLatest([
       this.form.get("search").valueChanges.pipe(startWith("")),
