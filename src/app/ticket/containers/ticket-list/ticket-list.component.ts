@@ -1,13 +1,21 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Dictionary } from "@ngrx/entity";
 import { select, Store } from "@ngrx/store";
-import { combineLatest, Observable } from "rxjs";
+import { combineLatest, Observable, Subscription } from "rxjs";
 import { map, startWith } from "rxjs/operators";
 import { Ticket, User } from "src/app/backend.service";
+import { noopTicket } from "../../store/actions/ticket.actions";
 import {
   selectAllTickets,
+  selectCompleted,
+  selectIncomplete,
   selectTicketByType,
 } from "../../store/selectors/ticket.selectors";
 import { selectUserEntities } from "../../store/selectors/user.selectors";
@@ -18,22 +26,40 @@ import { selectUserEntities } from "../../store/selectors/user.selectors";
   styleUrls: ["./ticket-list.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TicketListComponent implements OnInit {
+export class TicketListComponent implements OnInit, OnDestroy {
   public tickets$: Observable<Ticket[]>;
   public userEntities$: Observable<Dictionary<User>>;
 
   form = this.fb.group({
     search: [""],
   });
+  subscriptions: Subscription;
 
   constructor(
     private store: Store,
     private router: Router,
     private fb: FormBuilder
   ) {
-    this.store.pipe(select(selectTicketByType)).subscribe((data) => {
-      console.log(data);
-    });
+    this.subscriptions = new Subscription();
+
+    this.subscriptions.add(
+      this.store.pipe(select(selectCompleted)).subscribe((data) => {
+        console.log("selectCompleted");
+        console.log(data);
+      })
+    );
+    this.subscriptions.add(
+      this.store.pipe(select(selectIncomplete)).subscribe((data) => {
+        console.log("selectIncomplete");
+        console.log(data);
+      })
+    );
+    this.subscriptions.add(
+      this.store.pipe(select(selectTicketByType)).subscribe((data) => {
+        console.log("selectTicketByType");
+        console.log(data);
+      })
+    );
 
     this.userEntities$ = this.store.pipe(select(selectUserEntities));
     this.tickets$ = combineLatest([
@@ -58,7 +84,15 @@ export class TicketListComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
+
   navToTicket(ticket: Ticket) {
     this.router.navigate(["edit/" + ticket.id]);
+  }
+
+  doNoop() {
+    this.store.dispatch(noopTicket({ shtuff: {} }));
   }
 }

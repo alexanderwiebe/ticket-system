@@ -1,5 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from "@ngrx/entity";
 import { createReducer, on } from "@ngrx/store";
+import { immerOn } from "ngrx-immer/store";
 import { Ticket } from "src/app/backend.service";
 import * as TicketActions from "../actions/ticket.actions";
 
@@ -43,5 +44,10 @@ export const reducer = createReducer(
     TicketActions.updateTicketSuccess,
     (state, { ticket }) =>
       adapter.upsertOne(ticket, { ...state, loading: false, loaded: true })
-  )
+  ),
+  immerOn(TicketActions.noopTicket, (state, { shtuff }) => {
+    console.log("shtuff");
+    debugger;
+    (state as any).loading = false;
+  })
 );

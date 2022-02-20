@@ -42,3 +42,8 @@ export const updateTicketFailure = createAction(
   "[Ticket] Update Ticket Failure",
   props<{ error: any }>()
 );
+
+export const noopTicket = createAction(
+  "[Ticket] Noop",
+  props<{ shtuff: any }>()
+);
