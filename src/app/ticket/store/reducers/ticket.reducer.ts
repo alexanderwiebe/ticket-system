@@ -48,6 +48,7 @@ export const reducer = createReducer(
   immerOn(TicketActions.noopTicket, (state, { shtuff }) => {
     console.log("shtuff");
     debugger;
-    (state as any).loading = false;
+    state.loading = true;
+    return state;
   })
 );
