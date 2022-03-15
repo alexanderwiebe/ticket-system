@@ -1,3 +1,6 @@
 table {
   width: 100%;
 }
+.component-border {
+  border: thick solid green;
+}

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Dictionary } from "@ngrx/entity";
 import { select, Store } from "@ngrx/store";
@@ -17,6 +22,8 @@ import {
   templateUrl: "./ticket.component.html",
   styleUrls: ["./ticket.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "container" },
+  encapsulation: ViewEncapsulation.None,
 })
 export class TicketComponent implements OnInit {
   ticket$: Observable<Ticket>;
@@ -35,10 +42,12 @@ export class TicketComponent implements OnInit {
   ngOnInit(): void {}
 
   onSave(ticket: Ticket) {
+    //imagine this is a service
     this.store.dispatch(createTicket({ ticket }));
   }
 
   onUpdate(ticket: Ticket) {
+    //imagine this is a service
     this.store.dispatch(updateTicket({ ticket }));
   }
 }

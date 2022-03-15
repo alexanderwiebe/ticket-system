@@ -1,39 +1,61 @@
-<mat-card>
+<div class="component-border">
+  <mat-card>
     <mat-card-title>
-        <h2 *ngIf="ticket else newTicket">Edit ticket</h2>
-        <ng-template #newTicket>
-            <h2>Add ticket</h2>
-        </ng-template>
+      <h2 *ngIf="ticket; else newTicket">Edit ticket</h2>
+      <ng-template #newTicket>
+        <h2>Add ticket</h2>
+      </ng-template>
     </mat-card-title>
 
-
     <div [formGroup]="form">
-        <div>
-            <mat-form-field class="form-group">
-                <mat-label>description: </mat-label>
-                <input matInput type="text" class="form-control"  formControlName="description">
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-form-field class="form-group">
-                <mat-label>assignee: </mat-label>
-                <mat-select [(value)]="selectedUserId" (selectionChange)="userSelected($event)">
-                    <mat-option value>-- select assignee --</mat-option>
-                    <mat-option *ngFor="let user of users" [value]="user?.id">
-                      {{user?.name}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div>
-            <mat-slide-toggle formControlName="completed">complete</mat-slide-toggle>
-        </div>
+      <div>
+        <mat-form-field class="form-group">
+          <mat-label>description: </mat-label>
+          <input
+            matInput
+            type="text"
+            class="form-control"
+            formControlName="description"
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="form-group">
+          <mat-label>assignee: </mat-label>
+          <mat-select
+            [(value)]="selectedUserId"
+            (selectionChange)="userSelected($event)"
+          >
+            <mat-option value>-- select assignee --</mat-option>
+            <mat-option *ngFor="let user of users" [value]="user?.id">
+              {{ user?.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-slide-toggle formControlName="completed"
+          >complete</mat-slide-toggle
+        >
+      </div>
     </div>
     <div *ngIf="formError">
-        <span>Please correct form before trying to complete / save</span>
+      <span>Please correct form before trying to complete / save</span>
     </div>
     <button mat-flat-button (click)="cancel()">Cancel</button>
-    <button mat-flat-button color="accent" *ngIf="ticket?.id" (click)="complete()">Complete</button>
-    <button mat-flat-button color="primary" *ngIf="!ticket" (click)="save()">Save</button>
-    <button mat-flat-button color="primary" *ngIf="ticket" (click)="update()">Update</button>
-</mat-card>
+    <button
+      mat-flat-button
+      color="accent"
+      *ngIf="ticket?.id"
+      (click)="complete()"
+    >
+      Complete
+    </button>
+    <button mat-flat-button color="primary" *ngIf="!ticket" (click)="save()">
+      Save
+    </button>
+    <button mat-flat-button color="primary" *ngIf="ticket" (click)="update()">
+      Update
+    </button>
+  </mat-card>
+</div>

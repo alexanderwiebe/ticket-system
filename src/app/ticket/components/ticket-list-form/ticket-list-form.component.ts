@@ -6,6 +6,7 @@ import {
   OnChanges,
   Output,
   SimpleChanges,
+  ViewEncapsulation,
 } from "@angular/core";
 import { MatTableDataSource } from "@angular/material/table";
 import { Dictionary } from "@ngrx/entity";
@@ -16,6 +17,8 @@ import { Ticket, User } from "src/app/backend.service";
   templateUrl: "./ticket-list-form.component.html",
   styleUrls: ["./ticket-list-form.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "component" },
+  encapsulation: ViewEncapsulation.None,
 })
 export class TicketListFormComponent implements OnChanges {
   @Input() tickets: Ticket[];

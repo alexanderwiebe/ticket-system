@@ -1,11 +1,13 @@
-<div [formGroup]="form">
-    <mat-form-field class="form-group">
-        <mat-label>Search</mat-label>
-        <input matInput type="text" class="form-control" formControlName="search">
-    </mat-form-field>
-</div>
+<div class="container-border">
+    <div [formGroup]="form">
+        <mat-form-field class="form-group">
+            <mat-label>Search</mat-label>
+            <input matInput type="text" class="form-control" formControlName="search">
+        </mat-form-field>
+    </div>
 
-<app-ticket-list-form 
-    [tickets]="tickets$ | async"
-    [usersById]="userEntities$ | async"
-    (openTicket)="navToTicket($event)"></app-ticket-list-form>
+    <app-ticket-list-form 
+        [tickets]="tickets$ | async"
+        [usersById]="userEntities$ | async"
+        (openTicket)="navToTicket($event)"></app-ticket-list-form>
+</div>

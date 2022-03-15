@@ -5,6 +5,7 @@ import {
   Input,
   OnInit,
   Output,
+  ViewEncapsulation,
 } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Dictionary } from "@ngrx/entity";
@@ -15,6 +16,8 @@ import { Ticket, User } from "src/app/backend.service";
   templateUrl: "./ticket-form.component.html",
   styleUrls: ["./ticket-form.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "component" },
+  encapsulation: ViewEncapsulation.None,
 })
 export class TicketFormComponent implements OnInit {
   @Input() ticket: Ticket;

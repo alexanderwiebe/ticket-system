@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  ViewEncapsulation,
+} from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { Router } from "@angular/router";
 import { Dictionary } from "@ngrx/entity";
@@ -14,6 +19,8 @@ import { selectUserEntities } from "../../store/selectors/user.selectors";
   templateUrl: "./ticket-list.component.html",
   styleUrls: ["./ticket-list.component.css"],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: { class: "container" },
+  encapsulation: ViewEncapsulation.None,
 })
 export class TicketListComponent implements OnInit {
   public tickets$: Observable<Ticket[]>;
@@ -29,6 +36,7 @@ export class TicketListComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.userEntities$ = this.store.pipe(select(selectUserEntities));
+
     this.tickets$ = combineLatest([
       this.form.get("search").valueChanges.pipe(startWith("")),
       this.store.pipe(select(selectAllTickets)),
