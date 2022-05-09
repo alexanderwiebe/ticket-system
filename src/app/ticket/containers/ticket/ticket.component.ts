@@ -42,12 +42,10 @@ export class TicketComponent implements OnInit {
   ngOnInit(): void {}
 
   onSave(ticket: Ticket) {
-    //imagine this is a service
     this.store.dispatch(createTicket({ ticket }));
   }
 
   onUpdate(ticket: Ticket) {
-    //imagine this is a service
     this.store.dispatch(updateTicket({ ticket }));
   }
 }

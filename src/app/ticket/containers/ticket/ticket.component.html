@@ -2,7 +2,7 @@
     <app-ticket-form
         [ticket]="ticket$ | async"
         [users]="users$ | async"
-        [usersById]="userEntities$ | async"
+        [usersById]="usersById$ | async"
         (saveTicket)="onSave($event)"
         (updateTicket)="onUpdate($event)"></app-ticket-form>
 </div>
