@@ -6,7 +6,7 @@ import {
   OnInit,
   Output,
 } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
+import { UntypedFormBuilder, Validators } from "@angular/forms";
 import { Dictionary } from "@ngrx/entity";
 import { Ticket, User } from "src/app/backend.service";
 
@@ -33,7 +33,7 @@ export class TicketFormComponent implements OnInit {
   formError = false;
   selectedUserId: number = null;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     if (this.ticket) {
